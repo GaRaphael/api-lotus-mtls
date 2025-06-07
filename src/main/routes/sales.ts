@@ -4,6 +4,7 @@ import { AddSalesUseCase, FindAllSalesUseCase } from '../../data/useCase/sales';
 import { adaptRoute } from '../middlewares/adapter/expressRouteAdapter';
 import { Controller } from '../../presentation/controller';
 import { SalesRepository } from '../../infra/db';
+import auth from '../middlewares/auth';
 
 const router = Router();
 
@@ -29,7 +30,7 @@ const makeFindAllSalesController = (): Controller => {
 
 
 router
-    .post('/sales', adaptRoute(makeAddSalesController()))
-    .get('/sales', adaptRoute(makeFindAllSalesController()))
+    .post('/sales',auth,  adaptRoute(makeAddSalesController()))
+    .get('/sales', auth, adaptRoute(makeFindAllSalesController()))
 
 export default router;

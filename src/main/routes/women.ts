@@ -16,6 +16,7 @@ import {
 import { adaptRoute } from '../middlewares/adapter/expressRouteAdapter';
 import { Controller } from '../../presentation/controller';
 import { WomenRepository } from '../../infra/db';
+import auth from '../middlewares/auth';
 
 const router = Router();
 
@@ -64,11 +65,11 @@ const makeFindByIdWomenController = (): Controller => {
 }
 
 router
-    .post('/women', adaptRoute(makeAddWomenController()))
-    .get('/women/all', adaptRoute(makeFindAllWomenController()))
-    .get('/women/:id', adaptRoute(makeFindByIdWomenController()))
-    .put('/women/:id', adaptRoute(makePutWomenController()))
-    .put('/disable/women/:id', adaptRoute(makeDisableWomenController()))
+    .post('/women', auth, adaptRoute(makeAddWomenController()))
+    .get('/women/all', auth, adaptRoute(makeFindAllWomenController()))
+    .get('/women/:id', auth, adaptRoute(makeFindByIdWomenController()))
+    .put('/women/:id', auth, adaptRoute(makePutWomenController()))
+    .put('/disable/women/:id', auth, adaptRoute(makeDisableWomenController()))
 
 
 export default router;

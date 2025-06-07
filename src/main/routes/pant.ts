@@ -16,6 +16,7 @@ import {
 import { adaptRoute } from '../middlewares/adapter/expressRouteAdapter';
 import { Controller } from '../../presentation/controller';
 import { PantRepository } from '../../infra/db';
+import auth from '../middlewares/auth';
 
 const router = Router();
 
@@ -64,11 +65,11 @@ const makeFindByIdPantController = (): Controller => {
 }
 
 router
-    .post('/pant', adaptRoute(makeAddPantController()))
-    .get('/pant/all', adaptRoute(makeFindAllPantController()))
-    .get('/pant/:id', adaptRoute(makeFindByIdPantController()))
-    .put('/pant/:id', adaptRoute(makePutPantController()))
-    .put('/disable/pant/:id', adaptRoute(makeDisablePantController()))
+    .post('/pant', auth, adaptRoute(makeAddPantController()))
+    .get('/pant/all', auth, adaptRoute(makeFindAllPantController()))
+    .get('/pant/:id', auth, adaptRoute(makeFindByIdPantController()))
+    .put('/pant/:id', auth, adaptRoute(makePutPantController()))
+    .put('/disable/pant/:id', auth, adaptRoute(makeDisablePantController()))
 
 
 export default router;

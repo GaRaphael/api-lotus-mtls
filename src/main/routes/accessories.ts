@@ -16,6 +16,7 @@ import {
 import { adaptRoute } from '../middlewares/adapter/expressRouteAdapter';
 import { Controller } from '../../presentation/controller';
 import { AccessoriesRepository } from '../../infra/db';
+import auth from '../middlewares/auth';
 
 const router = Router();
 
@@ -64,11 +65,11 @@ const makeFindByIdAccessoriesController = (): Controller => {
 
 
 router
-    .post('/accessories', adaptRoute(makeAddAccessoriesController()))
-    .get('/accessories/all', adaptRoute(makeFindAllAccessoriesController()))
-    .get('/accessories/:id', adaptRoute(makeFindByIdAccessoriesController()))
-    .put('/accessories/:id', adaptRoute(makePutAccessoriesController()))
-    .put('/disable/accessories/:id', adaptRoute(makeDisableAccessoriesController()))
+    .post('/accessories', auth, adaptRoute(makeAddAccessoriesController()))
+    .get('/accessories/all', auth, adaptRoute(makeFindAllAccessoriesController()))
+    .get('/accessories/:id', auth, adaptRoute(makeFindByIdAccessoriesController()))
+    .put('/accessories/:id', auth, adaptRoute(makePutAccessoriesController()))
+    .put('/disable/accessories/:id', auth, adaptRoute(makeDisableAccessoriesController()))
 
 
 export default router;

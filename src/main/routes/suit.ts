@@ -16,6 +16,7 @@ import {
 import { adaptRoute } from '../middlewares/adapter/expressRouteAdapter';
 import { Controller } from '../../presentation/controller';
 import { SuitRepository } from '../../infra/db';
+import auth from '../middlewares/auth';
 
 const router = Router();
 
@@ -64,11 +65,11 @@ const makeFindByIdSuitController = (): Controller => {
 }
 
 router
-    .post('/suit', adaptRoute(makeAddSuitController()))
-    .get('/suit/all', adaptRoute(makeFindAllSuitController()))
-    .get('/suit/:id', adaptRoute(makeFindByIdSuitController()))
-    .put('/suit/:id', adaptRoute(makePutSuitController()))
-    .put('/disable/suit/:id', adaptRoute(makeDisableSuitController()))
+    .post('/suit', auth, adaptRoute(makeAddSuitController()))
+    .get('/suit/all', auth, adaptRoute(makeFindAllSuitController()))
+    .get('/suit/:id', auth, adaptRoute(makeFindByIdSuitController()))
+    .put('/suit/:id',auth,  adaptRoute(makePutSuitController()))
+    .put('/disable/suit/:id',auth,  adaptRoute(makeDisableSuitController()))
 
 
 export default router;
