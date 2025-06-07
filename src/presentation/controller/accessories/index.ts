@@ -1,0 +1,5 @@
+export * from './addAccessoriesController'
+export * from './putAccessoriesController'
+export * from './findAllAccessoriesController'
+export * from './disableAccessoriesController'
+export * from './findByIdAccessoriesController'

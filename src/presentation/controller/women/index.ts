@@ -1,0 +1,5 @@
+export * from './addWomenController'
+export * from './findAllWomenController'
+export * from './putWomenController'
+export * from './disableWomenController'
+export * from './findByIdWomenController'

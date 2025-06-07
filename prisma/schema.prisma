@@ -1,0 +1,118 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model user {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  cpf      String @unique
+  name     String
+  password String
+  active     Boolean  @default(true)
+  login      Boolean  @default(false)
+  created_at DateTime @default(dbgenerated("CURRENT_TIMESTAMP(0)")) @db.Timestamp(0)
+  updated_at DateTime @default(dbgenerated("CURRENT_TIMESTAMP(0)")) @db.Timestamp(0)
+
+  user_has_suits   user_has_suits[]
+}
+
+
+model suits {
+  id          Int     @id @default(autoincrement())
+  image       String?
+  model       String
+  size        String
+  color       String
+  price       Float
+  composition String?
+  description String?
+
+  active         Boolean          @default(true)
+  created_at     DateTime         @default(dbgenerated("CURRENT_TIMESTAMP(0)")) @db.Timestamp(0)
+  updated_at     DateTime         @default(dbgenerated("CURRENT_TIMESTAMP(0)")) @db.Timestamp(0)
+  user_has_suits user_has_suits[]
+}
+
+model pants {
+  id          Int     @id @default(autoincrement())
+  image       String?
+  model       String
+  size        String
+  color       String
+  price       Float
+  composition String?
+  description String?
+
+  active     Boolean  @default(true)
+  created_at DateTime @default(dbgenerated("CURRENT_TIMESTAMP(0)")) @db.Timestamp(0)
+  updated_at DateTime @default(dbgenerated("CURRENT_TIMESTAMP(0)")) @db.Timestamp(0)
+}
+
+model women_suit {
+  id          Int     @id @default(autoincrement())
+  image       String?
+  model       String
+  size        String
+  color       String
+  price       Float
+  composition String?
+  description String?
+
+  active     Boolean  @default(true)
+  created_at DateTime @default(dbgenerated("CURRENT_TIMESTAMP(0)")) @db.Timestamp(0)
+  updated_at DateTime @default(dbgenerated("CURRENT_TIMESTAMP(0)")) @db.Timestamp(0)
+}
+
+model accessories {
+  id          Int     @id @default(autoincrement())
+  image       String?
+  model       String
+  size        String
+  color       String
+  price       Float
+  composition String?
+  description String?
+
+  active     Boolean  @default(true)
+  created_at DateTime @default(dbgenerated("CURRENT_TIMESTAMP(0)")) @db.Timestamp(0)
+  updated_at DateTime @default(dbgenerated("CURRENT_TIMESTAMP(0)")) @db.Timestamp(0)
+}
+
+model user_has_suits {
+  id       Int @id @default(autoincrement())
+  user_id  Int
+  suits_id Int
+
+  active     Boolean  @default(true)
+  created_at DateTime @default(dbgenerated("CURRENT_TIMESTAMP(0)")) @db.Timestamp(0)
+  updated_at DateTime @default(dbgenerated("CURRENT_TIMESTAMP(0)")) @db.Timestamp(0)
+  user       user     @relation(fields: [user_id], references: [id])
+  suits      suits    @relation(fields: [suits_id], references: [id])
+}
+
+model sales {
+  id           Int    @id @default(autoincrement())
+  category     String
+  model        String
+  payment_type String
+  value        Float
+
+  active     Boolean  @default(true)
+  created_at DateTime @default(dbgenerated("CURRENT_TIMESTAMP(0)")) @db.Timestamp(0)
+  updated_at DateTime @default(dbgenerated("CURRENT_TIMESTAMP(0)")) @db.Timestamp(0)
+}
+
+model data_dash {
+  id           Int    @id @default(autoincrement())
+  payment_type String
+  value        Float
+
+  active     Boolean  @default(true)
+  created_at DateTime @default(dbgenerated("CURRENT_TIMESTAMP(0)")) @db.Timestamp(0)
+  updated_at DateTime @default(dbgenerated("CURRENT_TIMESTAMP(0)")) @db.Timestamp(0)
+}
