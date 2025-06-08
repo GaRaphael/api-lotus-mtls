@@ -38,7 +38,6 @@ const makeResetPassController = (): Controller => {
 router
     .post('/user', requireCert, adaptRoute(makeAddUserController()))
     .put('/reset', requireCert, adaptRoute(makeResetPassController()))
-//   .get('/user/:id', adaptRoute(makeFindByIdUserController()))
 
 
 export default router;
