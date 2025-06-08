@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { FindAllDataController } from '../../presentation/controller/data';
+import { FindAllDataController, GetTermsController } from '../../presentation/controller/data';
 import { FindAllDataUseCase } from '../../data/useCase/data';
 import { adaptRoute } from '../middlewares/adapter/expressRouteAdapter';
 import { Controller } from '../../presentation/controller';
@@ -17,9 +17,18 @@ const makeFindAllDataController = (): Controller => {
 };
 
 
+const makeGetTermsController = (): Controller => {
+
+    const getTermsController = new GetTermsController();
+
+    return getTermsController;
+};
+
+
 
 
 router
     .get('/data', auth, adaptRoute(makeFindAllDataController()))
+    .get('/terms', adaptRoute(makeGetTermsController()))
 
 export default router;
