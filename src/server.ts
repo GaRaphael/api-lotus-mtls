@@ -32,8 +32,7 @@ const httpsOptions = {
   key: fs.readFileSync('certs/server-key.pem'),
   cert: fs.readFileSync('certs/server-cert.pem'),
   ca: fs.readFileSync('certs/ca-cert.pem'),
-  requestCert: true,
-  rejectUnauthorized: false
+  requestCert: true
 };
 
 http.createServer(httpApp).listen(httpPort, () => {
